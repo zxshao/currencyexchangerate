@@ -1,4 +1,10 @@
 <resources>
     <string name="app_name">currency-exchange-rate</string>
     <string name="action_settings">Settings</string>
+    <string name="doexchange">doExchange</string>
+    <string name="exchange">Exchange</string>
+    <string name="inputcurrency">InputCurrency</string>
+    <string name="textview">TextView</string>
+    <string name="spinner" />
+    <string name="textview">TextView</string>
 </resources>
