@@ -10,5 +10,13 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
+        <Button
+            android:id="@+id/showExchange"
+            android:layout_width="159dp"
+            android:layout_height="85dp"
+            android:contentDescription="doExchange"
+            android:text="Exchange"
+            tools:layout_editor_absoluteX="126dp"
+            tools:layout_editor_absoluteY="389dp" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 </androidx.coordinatorlayout.widget.CoordinatorLayout>
