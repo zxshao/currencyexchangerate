@@ -4,6 +4,10 @@ import android.os.Bundle;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.snackbar.Snackbar;
+import com.google.gson.GsonBuilder;
+import com.google.gson.JsonElement;
+import com.google.gson.JsonParser;
+import com.google.gson.JsonObject;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
@@ -14,9 +18,35 @@ import android.view.MenuItem;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+import java.net.*;
+import java.io.*;
 
 public class MainActivity extends AppCompatActivity {
 
+    // url for exchange rate with base EUR
+    private final String eur = "https://api.exchangeratesapi.io/latest?base=EUR";
+    // url for exchange rate with base USD
+    private final String usd = "https://api.exchangeratesapi.io/latest?base=USD";
+
+    public JsonObject getJson(String rate) {
+        JsonObject rootobj = null;
+        try {
+            URL url = new URL(rate);
+            URLConnection request = url.openConnection();
+            request.connect();
+            // Convert to a JSON object to print data
+            JsonParser jp = new JsonParser();
+            JsonElement root = jp.parse(new InputStreamReader((InputStream) request.getContent()));
+            rootobj = root.getAsJsonObject();
+            System.out.println(rootobj.getAsString());
+            return rootobj;
+        } catch (MalformedURLException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return rootobj;
+    }
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
