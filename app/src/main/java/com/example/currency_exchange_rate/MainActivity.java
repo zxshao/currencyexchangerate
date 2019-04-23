@@ -15,13 +15,19 @@ import androidx.appcompat.widget.Toolbar;
 import android.view.View;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.Adapter;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.Toast;
+
 import java.net.*;
 import java.io.*;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements AdapterView.OnItemSelectedListener {
 
     // url for exchange rate with base EUR
     private final String eur = "https://api.exchangeratesapi.io/latest?base=EUR";
@@ -67,6 +73,15 @@ public class MainActivity extends AppCompatActivity {
         TextView outputCurrency = findViewById(R.id.OutputCurrency);
         String output = outputCurrency.getText().toString();
 
+        Spinner spn1 = findViewById(R.id.spnSex);
+        Spinner spn2 = findViewById(R.id.spnSex2);
+        ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this, R.array.currencyname, android.R.layout.simple_spinner_item);
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        spn1.setAdapter(adapter);
+        spn1.setOnItemSelectedListener(this);
+        spn2.setAdapter(adapter);
+        spn2.setOnItemSelectedListener(this);
+
     }
 
     @Override
@@ -94,5 +109,16 @@ public class MainActivity extends AppCompatActivity {
 
     void doExchange() {
         return;
+    }
+
+    @Override
+    public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+        String text = parent.getItemAtPosition(position).toString();
+        Toast.makeText(parent.getContext(), text, Toast.LENGTH_SHORT).show();
+    }
+
+    @Override
+    public void onNothingSelected(AdapterView<?> parent) {
+
     }
 }
