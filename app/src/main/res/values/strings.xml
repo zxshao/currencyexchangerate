@@ -6,5 +6,11 @@
     <string name="inputcurrency">InputCurrency</string>
     <string name="textview">TextView</string>
     <string name="spinner" />
-    <string name="textview">TextView</string>
+    <string-array name="currencyname">
+        <item>USD</item>
+        <item>EUR</item>
+        <item>CNY</item>
+        <item>JPY</item>
+        <item>CAD</item>
+    </string-array>
 </resources>
