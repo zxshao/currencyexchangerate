@@ -10,5 +10,6 @@ public class exchange {
         } catch (Exception e) {
             e.printStackTrace();
         }
+        return 0;
     }
 }
