@@ -37,7 +37,7 @@
             android:layout_marginBottom="8dp"
             android:autofillHints=""
             android:contentDescription="@string/inputcurrency"
-            android:inputType=""
+            android:inputType="number"
             android:text="@string/textview"
             android:visibility="visible"
             app:layout_constraintBottom_toTopOf="@+id/showExchange"
