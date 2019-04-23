@@ -8,8 +8,8 @@
     tools:context=".MainActivity">
 
     <androidx.constraintlayout.widget.ConstraintLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_width="405dp"
+        android:layout_height="735dp">
 
         <Button
             android:id="@+id/showExchange"
@@ -19,34 +19,31 @@
             android:layout_marginLeft="8dp"
             android:layout_marginEnd="8dp"
             android:layout_marginRight="8dp"
-            android:layout_marginBottom="228dp"
+            android:layout_marginBottom="216dp"
             android:contentDescription="@string/doexchange"
             android:text="@string/exchange"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.539"
             app:layout_constraintStart_toStartOf="parent" />
 
         <EditText
             android:id="@+id/InputCurrency"
             android:layout_width="226dp"
             android:layout_height="64dp"
-            android:layout_marginStart="8dp"
-            android:layout_marginLeft="8dp"
-            android:layout_marginTop="108dp"
-            android:layout_marginEnd="8dp"
-            android:layout_marginRight="8dp"
+            android:layout_marginStart="20dp"
+            android:layout_marginLeft="20dp"
+            android:layout_marginTop="8dp"
             android:layout_marginBottom="8dp"
+            android:autofillHints=""
             android:contentDescription="@string/inputcurrency"
+            android:inputType=""
             android:text="@string/textview"
             android:visibility="visible"
             app:layout_constraintBottom_toTopOf="@+id/showExchange"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.047"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.0"
-            android:inputType=""
-            android:autofillHints=""></EditText>
+            app:layout_constraintVertical_bias="0.321"></EditText>
 
         <Spinner
             android:id="@+id/spnSex"
@@ -63,9 +60,10 @@
             android:textSize="20sp"
             app:layout_constraintBottom_toTopOf="@+id/showExchange"
             app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.466"
             app:layout_constraintStart_toEndOf="@+id/InputCurrency"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.295" />
+            app:layout_constraintVertical_bias="0.321" />
 
         <Spinner
             android:id="@+id/spnSex2"
@@ -82,28 +80,24 @@
             android:textSize="20sp"
             app:layout_constraintBottom_toTopOf="@+id/showExchange"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.52"
+            app:layout_constraintHorizontal_bias="0.466"
             app:layout_constraintStart_toEndOf="@+id/InputCurrency"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.674" />
+            app:layout_constraintTop_toBottomOf="@+id/spnSex"
+            app:layout_constraintVertical_bias="0.363" />
 
         <TextView
             android:id="@+id/OutputCurrency"
             android:layout_width="227dp"
             android:layout_height="61dp"
-            android:layout_marginStart="16dp"
-            android:layout_marginLeft="16dp"
-            android:layout_marginTop="64dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginLeft="8dp"
+            android:layout_marginTop="72dp"
             android:layout_marginEnd="8dp"
             android:layout_marginRight="8dp"
-            android:layout_marginBottom="8dp"
             android:text="@string/textview"
-            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toStartOf="@+id/spnSex2"
-            app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/InputCurrency"
-            app:layout_constraintVertical_bias="0.0" />
+            app:layout_constraintTop_toBottomOf="@+id/InputCurrency" />
         android:spinnerMode="dialog"/>
     </androidx.constraintlayout.widget.ConstraintLayout>
 </androidx.coordinatorlayout.widget.CoordinatorLayout>
