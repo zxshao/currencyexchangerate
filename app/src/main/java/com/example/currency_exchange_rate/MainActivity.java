@@ -35,7 +35,6 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
     private final String usd = "https://api.exchangeratesapi.io/latest?base=USD";
     // url for exchange rate with base JPY
     private final String jpy = "https://api.exchangeratesapi.io/latest?base=JPY";
-    // url for exchange rate with base RM
 
     public JsonObject getJson(String rate) {
         JsonObject rootobj = null;
