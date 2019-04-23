@@ -29,10 +29,8 @@ import java.io.*;
 
 public class MainActivity extends AppCompatActivity implements AdapterView.OnItemSelectedListener {
 
-    // url for exchange rate with base EUR
-    private final String eur = "https://api.exchangeratesapi.io/latest?base=EUR";
-    // url for exchange rate with base USD
-    private final String usd = "https://api.exchangeratesapi.io/latest?base=USD";
+    // url for exchange rate with base something.
+    private final String url = "https://api.exchangeratesapi.io/latest?base=";
 
     public JsonObject getJson(String rate) {
         JsonObject rootobj = null;
