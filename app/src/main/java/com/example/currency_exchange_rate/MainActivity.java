@@ -59,9 +59,6 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
 
         EditText inputCurrency = (EditText) findViewById(R.id.InputCurrency);
         final String input = inputCurrency.getText().toString();
-        if (!input.equals("")) {
-            final double inputNumber = Double.valueOf(input);
-        }
 
         final TextView outputCurrency = findViewById(R.id.OutputCurrency);
 
@@ -87,6 +84,7 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
                     return;
                 }
                 JsonObject json = getJson(url + inPut);
+                double inputNumber = Double.valueOf(input);
                 double result = calculate(json, outPut, inputNumber);
                 outputCurrency.setText(Double.toString(result));
             }
