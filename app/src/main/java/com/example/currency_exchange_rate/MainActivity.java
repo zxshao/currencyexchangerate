@@ -59,7 +59,9 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
 
         EditText inputCurrency = (EditText) findViewById(R.id.InputCurrency);
         final String input = inputCurrency.getText().toString();
-        final double inputNumber = Double.valueOf(input);
+        if (!input.equals("")) {
+            final double inputNumber = Double.valueOf(input);
+        }
 
         final TextView outputCurrency = findViewById(R.id.OutputCurrency);
 
@@ -75,6 +77,9 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
         final Button doExchange = findViewById(R.id.showExchange);
         doExchange.setOnClickListener(new View.OnClickListener() {
             public void onClick (View v) {
+                if (input.equals("") || input == null) {
+                    return;
+                }
                 String inPut = spn1.getSelectedItem().toString();
                 String outPut = spn2.getSelectedItem().toString();
                 if (inPut.equals(outPut)) {
