@@ -33,7 +33,6 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
     private final String url = "https://api.exchangeratesapi.io/latest?base=";
 
     public JsonObject getJson(String rate) {
-        JsonObject rootobj = null;
         try {
             URL url = new URL(rate);
             URLConnection request = url.openConnection();
@@ -41,7 +40,7 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
             // Convert to a JSON object to print data
             JsonParser jp = new JsonParser();
             JsonElement root = jp.parse(new InputStreamReader((InputStream) request.getContent()));
-            rootobj = root.getAsJsonObject();
+            JsonObject rootobj = root.getAsJsonObject();
             System.out.println(rootobj.getAsString());
             return rootobj;
         } catch (MalformedURLException e) {
@@ -49,7 +48,7 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
         } catch (IOException e) {
             e.printStackTrace();
         }
-        return rootobj;
+        return null;
     }
     @Override
     protected void onCreate(Bundle savedInstanceState) {
