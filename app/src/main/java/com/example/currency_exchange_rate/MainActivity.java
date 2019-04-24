@@ -57,22 +57,14 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
         setContentView(R.layout.activity_main);
 
 
-        final Button doExchange = findViewById(R.id.showExchange);
-        doExchange.setOnClickListener(new View.OnClickListener() {
-            public void onClick (View v) {
-                doExchange();
-            }
-        });
-
-
         EditText inputCurrency = (EditText) findViewById(R.id.InputCurrency);
-        String input = inputCurrency.getText().toString();
+        final String input = inputCurrency.getText().toString();
+        final double inputNumber = Double.valueOf(input);
 
-        TextView outputCurrency = findViewById(R.id.OutputCurrency);
-        String output = outputCurrency.getText().toString();
+        final TextView outputCurrency = findViewById(R.id.OutputCurrency);
 
-        Spinner spn1 = findViewById(R.id.spnSex);
-        Spinner spn2 = findViewById(R.id.spnSex2);
+        final Spinner spn1 = findViewById(R.id.spnSex);
+        final Spinner spn2 = findViewById(R.id.spnSex2);
         ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this, R.array.currencyname, android.R.layout.simple_spinner_item);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spn1.setAdapter(adapter);
@@ -80,6 +72,20 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
         spn2.setAdapter(adapter);
         spn2.setOnItemSelectedListener(this);
 
+        final Button doExchange = findViewById(R.id.showExchange);
+        doExchange.setOnClickListener(new View.OnClickListener() {
+            public void onClick (View v) {
+                String inPut = spn1.getSelectedItem().toString();
+                String outPut = spn2.getSelectedItem().toString();
+                if (inPut.equals(outPut)) {
+                    outputCurrency.setText(input);
+                    return;
+                }
+                JsonObject json = getJson(url + inPut);
+                double result = calculate(json, outPut, inputNumber);
+                outputCurrency.setText(Double.toString(result));
+            }
+        });
     }
 
     @Override
@@ -105,9 +111,6 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
     }
 
 
-    void doExchange() {
-        return;
-    }
 
     @Override
     public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
@@ -118,5 +121,15 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
     @Override
     public void onNothingSelected(AdapterView<?> parent) {
         return;
+    }
+
+    public double calculate(JsonObject json, String outCurrency, double inputNumber) {
+        try {
+            double rate = json.getAsJsonObject("rates").getAsJsonObject(outCurrency).getAsDouble();
+            return rate * inputNumber;
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return 0;
     }
 }
