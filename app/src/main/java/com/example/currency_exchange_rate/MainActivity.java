@@ -71,7 +71,7 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
         doExchange.setOnClickListener(new View.OnClickListener() {
             public void onClick (View v) {
                 String input = inputCurrency.getText().toString();
-                if (input.equals("") || input == null) {
+                if (input.equals("")) {
                     return;
                 }
                 String inPut = spn1.getSelectedItem().toString();
@@ -83,7 +83,7 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
                 JsonObject json = getJson(url + inPut);
                 double inputNumber = Double.valueOf(input);
                 double result = calculate(json, outPut, inputNumber);
-                ((TextView) findViewById(R.id.OutputCurrency)).setText(Double.toString(result));
+                ((TextView) findViewById(R.id.OutputCurrency)).setText(String.valueOf(result));
             }
         });
     }
@@ -120,7 +120,6 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
 
     @Override
     public void onNothingSelected(AdapterView<?> parent) {
-        return;
     }
 
     public double calculate(JsonObject json, String outCurrency, double inputNumber) {
