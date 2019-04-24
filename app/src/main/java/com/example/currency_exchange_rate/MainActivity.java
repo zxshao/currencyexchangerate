@@ -55,12 +55,9 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        final EditText inputCurrency = (EditText) findViewById(R.id.InputCurrency);
 
-        EditText inputCurrency = (EditText) findViewById(R.id.InputCurrency);
-        final String input = inputCurrency.getText().toString();
-
-        final TextView outputCurrency = findViewById(R.id.OutputCurrency);
-
+        // two spinners.
         final Spinner spn1 = findViewById(R.id.spnSex);
         final Spinner spn2 = findViewById(R.id.spnSex2);
         ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this, R.array.currencyname, android.R.layout.simple_spinner_item);
@@ -73,19 +70,20 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
         final Button doExchange = findViewById(R.id.showExchange);
         doExchange.setOnClickListener(new View.OnClickListener() {
             public void onClick (View v) {
+                String input = inputCurrency.getText().toString();
                 if (input.equals("") || input == null) {
                     return;
                 }
                 String inPut = spn1.getSelectedItem().toString();
                 String outPut = spn2.getSelectedItem().toString();
                 if (inPut.equals(outPut)) {
-                    outputCurrency.setText(input);
+                    ((TextView) findViewById(R.id.OutputCurrency)).setText(input);
                     return;
                 }
                 JsonObject json = getJson(url + inPut);
                 double inputNumber = Double.valueOf(input);
                 double result = calculate(json, outPut, inputNumber);
-                outputCurrency.setText(Double.toString(result));
+                ((TextView) findViewById(R.id.OutputCurrency)).setText(Double.toString(result));
             }
         });
     }
