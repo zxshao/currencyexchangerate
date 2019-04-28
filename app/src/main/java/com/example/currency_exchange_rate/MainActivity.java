@@ -32,7 +32,7 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
     // url for exchange rate with base something.
     private final String url = "https://api.exchangeratesapi.io/latest?base=";
 
-    public JsonObject getJson(String rate) {
+    public static JsonObject getJson(String rate) {
         try {
             URL url = new URL(rate);
             URLConnection request = url.openConnection();

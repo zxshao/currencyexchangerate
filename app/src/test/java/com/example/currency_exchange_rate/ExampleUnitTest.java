@@ -1,5 +1,7 @@
 package com.example.currency_exchange_rate;
 
+import com.google.gson.JsonObject;
+
 import org.junit.Test;
 
 import static org.junit.Assert.*;
@@ -11,7 +13,8 @@ import static org.junit.Assert.*;
  */
 public class ExampleUnitTest {
     @Test
-    public void addition_isCorrect() {
+    public void url_isCorrect() {
+
         assertEquals(4, 2 + 2);
     }
 }
