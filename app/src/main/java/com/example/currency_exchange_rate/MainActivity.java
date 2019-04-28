@@ -12,6 +12,7 @@ import com.google.gson.JsonObject;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
+import android.os.StrictMode;
 import android.view.View;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -32,7 +33,7 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
     // url for exchange rate with base something.
     private final String url = "https://api.exchangeratesapi.io/latest?base=";
 
-    public static JsonObject getJson(String rate) {
+    public static String getJson(String rate) {
         try {
             URL url = new URL(rate);
             URLConnection request = url.openConnection();
@@ -40,8 +41,7 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
             // Convert to a JSON object to print data
             JsonParser jp = new JsonParser();
             JsonElement root = jp.parse(new InputStreamReader((InputStream) request.getContent()));
-            JsonObject rootobj = root.getAsJsonObject();
-            System.out.println(rootobj.getAsString());
+            String rootobj = root.getAsJsonObject().toString();
             return rootobj;
         } catch (MalformedURLException e) {
             e.printStackTrace();
@@ -56,6 +56,11 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
         setContentView(R.layout.activity_main);
 
         final EditText inputCurrency = (EditText) findViewById(R.id.InputCurrency);
+// This is the error preventing code
+        if (android.os.Build.VERSION.SDK_INT > 9) {
+            StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
+            StrictMode.setThreadPolicy(policy);
+        }
 
         // two spinners.
         final Spinner spn1 = findViewById(R.id.spnSex);
@@ -80,7 +85,7 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
                     ((TextView) findViewById(R.id.OutputCurrency)).setText(input);
                     return;
                 }
-                JsonObject json = getJson(url + inPut);
+                String json = getJson(url + inPut);
                 double inputNumber = Double.valueOf(input);
                 double result = calculate(json, outPut, inputNumber);
                 ((TextView) findViewById(R.id.OutputCurrency)).setText(String.valueOf(result));
@@ -122,13 +127,10 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
     public void onNothingSelected(AdapterView<?> parent) {
     }
 
-    public double calculate(JsonObject json, String outCurrency, double inputNumber) {
-        try {
-            double rate = json.getAsJsonObject("rates").getAsJsonObject(outCurrency).getAsDouble();
-            return rate * inputNumber;
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        return 0;
+    public double calculate(String json, String outCurrency, double inputNumber) {
+        JsonParser parser = new JsonParser();
+        JsonObject result = parser.parse(json).getAsJsonObject();
+        double rate = result.get("rates").getAsJsonObject().get(outCurrency).getAsDouble();
+        return rate * inputNumber;
     }
 }
